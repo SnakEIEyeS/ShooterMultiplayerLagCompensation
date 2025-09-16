@@ -100,7 +100,7 @@ void ABlasterPlayerController::ShowHighPingWarning()
 		BlasterHUD->CharacterOverlay &&
 		BlasterHUD->CharacterOverlay->HighPingImage &&
 		BlasterHUD->CharacterOverlay->HighPingAnimation;
-	if (bHUDValid)
+	if (bHUDValid && !BlasterHUD->CharacterOverlay->IsAnimationPlaying(BlasterHUD->CharacterOverlay->HighPingAnimation))
 	{
 		BlasterHUD->CharacterOverlay->PlayAnimation(BlasterHUD->CharacterOverlay->HighPingAnimation, 0.0f, 0);
 	}
@@ -115,8 +115,8 @@ void ABlasterPlayerController::HideHighPingWarning()
 		BlasterHUD->CharacterOverlay->HighPingAnimation;
 	if (bHUDValid && BlasterHUD->CharacterOverlay->IsAnimationPlaying(BlasterHUD->CharacterOverlay->HighPingAnimation))
 	{
-		BlasterHUD->CharacterOverlay->HighPingImage->SetRenderOpacity(0.0f);
 		BlasterHUD->CharacterOverlay->StopAnimation(BlasterHUD->CharacterOverlay->HighPingAnimation);
+		BlasterHUD->CharacterOverlay->HighPingImage->SetRenderOpacity(0.0f);
 	}
 }
 

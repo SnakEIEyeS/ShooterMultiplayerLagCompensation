@@ -78,7 +78,7 @@ private:
 	FName MatchState;
 
 	UPROPERTY(EditAnywhere)
-	float HighPingThreshold = 100.0f;
+	float HighPingThreshold = 50.0f;
 
 	float LevelStartingTime = 0.f;
 	float MatchTime = 0.f;
