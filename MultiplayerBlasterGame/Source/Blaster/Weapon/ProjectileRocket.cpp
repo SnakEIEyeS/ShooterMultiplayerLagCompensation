@@ -4,6 +4,7 @@
 #include "ProjectileRocket.h"
 #include "Kismet/GameplayStatics.h"
 #include "NiagaraComponent.h"
+#include "NiagaraSystemInstanceController.h"
 #include "Sound/SoundCue.h"
 #include "Components/BoxComponent.h"
 #include "Sound/SoundCue.h"
@@ -77,9 +78,9 @@ void AProjectileRocket::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, 
 	{
 		CollisionBox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
-	if (TrailSystemComponent && TrailSystemComponent->GetSystemInstance())
+	if (TrailSystemComponent && TrailSystemComponent->GetSystemInstanceController()->IsValid())
 	{
-		TrailSystemComponent->GetSystemInstance()->Deactivate();
+		TrailSystemComponent->GetSystemInstanceController()->Deactivate();
 	}
 	if (ProjectileLoopComponent && ProjectileLoopComponent->IsPlaying())
 	{
