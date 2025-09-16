@@ -6,6 +6,10 @@
 #include "Blueprint/UserWidget.h"
 #include "CharacterOverlay.generated.h"
 
+class UImage;
+class UProgressBar;
+class UTextBlock;
+
 /**
  * 
  */
@@ -15,10 +19,10 @@ class BLASTER_API UCharacterOverlay : public UUserWidget
 	GENERATED_BODY()
 public:
 	UPROPERTY(meta = (BindWidget))
-	class UProgressBar* HealthBar;
+	UProgressBar* HealthBar;
 
 	UPROPERTY(meta = (BindWidget))
-	class UTextBlock* HealthText;
+	UTextBlock* HealthText;
 
 	UPROPERTY(meta = (BindWidget))
 	UProgressBar* ShieldBar;
@@ -43,4 +47,10 @@ public:
 
 	UPROPERTY(meta = (BindWidget))
 	UTextBlock* GrenadesText;
+
+	UPROPERTY(meta = (BindWidget))
+	UImage* HighPingImage;
+
+	UPROPERTY(meta = (BindWidgetAnim), Transient)
+	UWidgetAnimation* HighPingAnimation;
 };

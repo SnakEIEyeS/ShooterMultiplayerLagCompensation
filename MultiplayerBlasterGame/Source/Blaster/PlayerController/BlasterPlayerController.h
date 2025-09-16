@@ -63,9 +63,22 @@ protected:
 	UFUNCTION(Client, Reliable)
 	void ClientJoinMidgame(FName StateOfMatch, float Warmup, float Match, float Cooldown, float StartingTime);
 
+	void HandlePingIndication();
+	void ShowHighPingWarning();
+	void HideHighPingWarning();
+
 private:
 	UPROPERTY()
 	class ABlasterHUD* BlasterHUD;
+
+	UPROPERTY()
+	class UCharacterOverlay* CharacterOverlay;
+
+	UPROPERTY(ReplicatedUsing = OnRep_MatchState)
+	FName MatchState;
+
+	UPROPERTY(EditAnywhere)
+	float HighPingThreshold = 100.0f;
 
 	float LevelStartingTime = 0.f;
 	float MatchTime = 0.f;
@@ -73,29 +86,23 @@ private:
 	float CooldownTime = 0.f;
 	uint32 CountdownInt = 0;
 
-	UPROPERTY(ReplicatedUsing = OnRep_MatchState)
-	FName MatchState;
+	float HUDHealth;
+	float HUDMaxHealth;
+	float HUDScore;
+	int32 HUDDefeats;
+	int32 HUDGrenades;
+	float HUDShield;
+	float HUDMaxShield;
+	float HUDCarriedAmmo;
+	float HUDWeaponAmmo;
+	bool bInitializeHealth : 1 = false;
+	bool bInitializeScore = false;
+	bool bInitializeDefeats = false;
+	bool bInitializeGrenades = false;
+	bool bInitializeShield = false;
+	bool bInitializeCarriedAmmo = false;
+	bool bInitializeWeaponAmmo = false;
 
 	UFUNCTION()
 	void OnRep_MatchState();
-
-	UPROPERTY()
-	class UCharacterOverlay* CharacterOverlay;
-
-	float HUDHealth;
-	bool bInitializeHealth = false;
-	float HUDMaxHealth;
-	float HUDScore;
-	bool bInitializeScore = false;
-	int32 HUDDefeats;
-	bool bInitializeDefeats = false;
-	int32 HUDGrenades;
-	bool bInitializeGrenades = false;
-	float HUDShield;
-	bool bInitializeShield = false;
-	float HUDMaxShield;
-	float HUDCarriedAmmo;
-	bool bInitializeCarriedAmmo = false;
-	float HUDWeaponAmmo;
-	bool bInitializeWeaponAmmo = false;
 };
